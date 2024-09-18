@@ -1,0 +1,11 @@
+HELP.md
+target/
+
+### IntelliJ IDEA ###
+.idea
+.mvn
+/src/main/java/com/portfolio/libraryweb/coder
+/src/main/resources
+*.iws
+*.iml
+*.ipr
