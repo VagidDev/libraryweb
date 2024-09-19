@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="icon" href="../static/icons/favicon.ico">
+    <title>Добавить книгу</title>
+</head>
+<body>
+<div class="container">
+    <div class=" p-4 mt-4" style="border: #363030 solid 3px; border-radius: 15px">
+        <h1>Добавление новой книги</h1>
+        <form action="/books/add" method="post" class="mt-5 needs-validation" id="add-book-form" novalidate>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingAuthor" name="author" placeholder="И.И. Иванов"
+                       required>
+                <label for="floatingAuthor">Автор</label>
+                <div class="invalid-feedback">
+                    Введите Автора!
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingTitle" name="title" placeholder="Title" required>
+                <label for="floatingTitle">Название книги</label>
+                <div class="invalid-feedback">
+                    Введите название книги!
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="floatingDate" name="dateOfWriting" placeholder="yyyy/MM/dd"
+                       required>
+                <label for="floatingDate">Дата написания</label>
+                <div class="invalid-feedback">
+                    Введите дату!
+                </div>
+                <div class="valid-feedback">
+                    Всё правильно!
+                                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select class="form-select" id="floatingSelect" name="genre" aria-label="Floating label select example">
+                    <option selected>Выберите жанр книги</option>
+                    <option value="romance">Роман</option>
+                    <option value="detective">Детектив</option>
+                    <option value="fantastic">Фантастика</option>
+                    <option value="science">Наука</option>
+                </select>
+                <label for="floatingSelect">Жанр</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="Напишите о чем эта книга" id="floatingPreface"
+                          name="preface" required
+                          style="height: 100px"></textarea>
+                <label for="floatingPreface">Предисловие</label>
+                <div class="invalid-feedback">
+                    Поле не должно быть пустым!
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="Напишите о чем эта книга" id="floatingText" name="text"
+                          required
+                          style="height: 300px"></textarea>
+                <label for="floatingText">Текст</label>
+                <div class="invalid-feedback">
+                    Поле не должно быть пустым!
+                </div>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-success" type="submit">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="../static/js/main.js"></script>
+</body>
+</html>

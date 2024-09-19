@@ -1,0 +1,43 @@
+<div class="container-fluid  mx-auto px-2 py-2" th:fragment="header">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <img th:src="@{/icons/stack-of-books.png}" class="bi me-2" width="40" height="32" alt="book-icon">
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="/" class="nav-link px-2 text-white" style="font-weight: bold;">Главная</a></li>
+            <li><a href="/events/" class="nav-link px-2 text-white">События</a></li>
+            <li><a href="/books/" class="nav-link px-2 text-white">Книги</a></li>
+        </ul>
+
+        <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
+                   aria-label="Search">
+        </form>-->
+
+        <div class="nav-item dropdown text-end" sec:authorize="isAuthenticated()">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Управление
+            </button>
+
+            <ul id="list" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">Аккаунт</a></li>
+                <li><a class="dropdown-item" href="#">Список книг</a></li>
+                <li><a class="dropdown-item" href="/books/add">Добавить книгу</a></li>
+                <li><a class="dropdown-item" href="#">Добавить событие</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">
+                        <input class="dropdown-item" type="submit" value="Выйти"/>
+                    </form>
+                </li>
+            </ul>
+        </div>
+
+        <div class="text-end" sec:authorize="!isAuthenticated()">
+            <a href="/login" type="button" class="btn btn-outline-light me-2">Login</a>
+            <a href="/sign_up" type="button" class="btn btn-warning">Sign up</a>
+        </div>
+    </div>
+    <script th:src="@{/js/main.js}"></script>
+</div>
