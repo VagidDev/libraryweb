@@ -1,8 +1,13 @@
 HELP.md
 target/
+src/main/resources/templates/addForms
 src/main/java/com/portfolio/libraryweb/coder/
-src/main/resources/
+src/main/resources/css/
+src/test
 .mvn/
+
+src/main/resources/js/test.js
+src/main/java/com/portfolio/libraryweb/exceptions/EventAbsenceException.java
 
 ### IntelliJ IDEA ###
 .idea
