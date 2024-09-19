@@ -1,8 +1,14 @@
 package com.portfolio.libraryweb.controllers;
 
+import com.portfolio.libraryweb.config.UserDetails;
 import com.portfolio.libraryweb.exceptions.BookAbsenceException;
 import com.portfolio.libraryweb.models.Book;
+import com.portfolio.libraryweb.models.User;
 import com.portfolio.libraryweb.services.BookService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +18,15 @@ import java.util.List;
 
 @Controller
 public class BookController {
-    private final BookService service;
+    private final BookService bookService;
 
-    public BookController(BookService service) {
-        this.service = service;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
     }
 
     @GetMapping("/books/")
     public String getBooks(Model model) {
-        List<Book> books = service.getAllBooks();
+        List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
         return "books";
     }
@@ -28,23 +34,23 @@ public class BookController {
     @GetMapping("/books/{id}")
     public String getBookById(@PathVariable long id, Model model) {
         try {
-            model.addAttribute("book", service.getBookById(id));
+            model.addAttribute("book", bookService.getBookById(id));
             return "read-book";
         } catch (BookAbsenceException e) {
             return "redirect:/books/";
         }
     }
-    //TODO: rework the method so that it receives a json object
+
     @PostMapping(value = "/books/add")
-    /*public String addBook(@RequestParam String title, @RequestParam String preface, @RequestParam String genre,
-                          @RequestParam String author, @RequestParam String dateOfWriting, @RequestParam String text) {
-        Book book = new Book(title, preface, genre, author, text, dateOfWriting);
-        service.addBook(book);
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String addBook(@RequestBody Book book) {
+        bookService.addBook(book);
         return "redirect:/books/";
-    }*/
-    //idk for what it
-    @GetMapping("/books/add/")
-    public String addBookForm(Model model) {
+    }
+
+    @GetMapping("/books/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String addBookForm() {
         return "add-book";
     }
 
