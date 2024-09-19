@@ -88,13 +88,36 @@ if (form) {
     }
   });
 }
-
-/*if (addBookForm) {
+//test
+if (addBookForm) {
     addBookForm.addEventListener('submit', function (event) {
 
-    })
-}*/
+        event.preventDefault();
 
+        if (addBookForm.checkValidity()) {
+            let book = {
+                title: document.getElementById('floatingTitle').value,
+                genre: document.getElementById('floatingSelect').value,
+                author: document.getElementById('floatingAuthor').value,
+                dateOfWriting: document.getElementById('floatingDate').value,
+                preface: document.getElementById('floatingPreface').value,
+                text: document.getElementById('floatingText').value
+            }
+            fetch('add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(book)
+            }).catch((error) => {
+                console.error('Error:', error);
+            });
+            // location.href = '/books/';
+        }
+
+    })
+}
+//~
 if (dropdownList) {
     dropdownList.addEventListener('click', function () {
     let list = document.getElementById('list').classList;

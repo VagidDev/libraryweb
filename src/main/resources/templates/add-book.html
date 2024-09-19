@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +12,7 @@
 <div class="container">
     <div class=" p-4 mt-4" style="border: #363030 solid 3px; border-radius: 15px">
         <h1>Добавление новой книги</h1>
-        <form action="/books/add" method="post" class="mt-5 needs-validation" id="add-book-form" novalidate>
+        <form class="mt-5 needs-validation" id="add-book-form" novalidate>
 
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="floatingAuthor" name="author" placeholder="И.И. Иванов"
@@ -80,6 +80,7 @@
         </form>
     </div>
 </div>
-<script src="../static/js/main.js"></script>
+<!--<script src="../static/js/main.js"></script>-->
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>
