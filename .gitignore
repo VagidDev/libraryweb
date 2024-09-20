@@ -8,6 +8,7 @@ src/test
 
 src/main/resources/js/test.js
 src/main/java/com/portfolio/libraryweb/exceptions/EventAbsenceException.java
+src/main/java/com/portfolio/libraryweb/models/Reservation.java
 
 ### IntelliJ IDEA ###
 .idea
