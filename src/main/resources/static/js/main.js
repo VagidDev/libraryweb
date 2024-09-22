@@ -21,6 +21,35 @@ let addBookForm = document.getElementById('add-book-form');
     })
 })()
 
+function preserveBook(book_id) {
+    fetch("/reservation/" + book_id, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: null
+    }).then((response) => {
+        switch (response.status) {
+            case 201:
+                alert("Книга была зарезервирована!");
+                break;
+            case 404:
+                alert("Not found");
+                break;
+            case 409:
+                alert("Книга уже зарезервирована вами!")
+                break;
+            case 423:
+                alert("Вы не можете взять больше 3-х книг!")
+                break;
+        }
+    })
+        .catch((error) => {
+            console.log('Error: ', error);
+        });
+
+}
+
 if (loginInput) {
 
   loginInput.addEventListener('change', function (event) {
@@ -88,7 +117,7 @@ if (form) {
     }
   });
 }
-//test
+
 if (addBookForm) {
     addBookForm.addEventListener('submit', function (event) {
 
@@ -112,12 +141,12 @@ if (addBookForm) {
             }).catch((error) => {
                 console.error('Error:', error);
             });
-            // location.href = '/books/';
+            location.href = '/books/';
         }
 
     })
 }
-//~
+
 if (dropdownList) {
     dropdownList.addEventListener('click', function () {
     let list = document.getElementById('list').classList;
@@ -128,3 +157,4 @@ if (dropdownList) {
     }
   });
 }
+
