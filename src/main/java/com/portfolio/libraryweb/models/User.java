@@ -17,8 +17,8 @@ public class User {
     private int age;
     private String email;
     private String role;
-    @OneToMany(mappedBy = "reader")
-    private List<Book> bookList;
+    @OneToMany(mappedBy = "user")
+    private List<Reservation> reservations;
 
     public User() {}
 
@@ -103,11 +103,11 @@ public class User {
         this.surname = surname;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
+    public List<Reservation> getReservations() {
+        return reservations;
     }
 
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 }

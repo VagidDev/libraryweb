@@ -1,7 +1,8 @@
 package com.portfolio.libraryweb.models;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 
 @Entity
@@ -18,9 +19,8 @@ public class Book {
     private String preface;
     @Column(columnDefinition = "text")
     private String text;
-    @ManyToOne
-    private User reader;
-    private String dateOfTaking;
+    @OneToMany(mappedBy = "book")
+    private List<Reservation> reservations;
 
     public Book() {}
 
@@ -89,20 +89,12 @@ public class Book {
         this.dateOfWriting = dateOfWriting;
     }
 
-    public String getDateOfTaking() {
-        return dateOfTaking;
+    public List<Reservation> getReservation() {
+        return reservations;
     }
 
-    public void setDateOfTaking(String dateOfTaking) {
-        this.dateOfTaking = dateOfTaking;
-    }
-
-    public User getReader() {
-        return reader;
-    }
-
-    public void setReader(User reader) {
-        this.reader = reader;
+    public void setReservation(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
 }
