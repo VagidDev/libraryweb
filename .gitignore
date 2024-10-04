@@ -6,9 +6,12 @@ src/main/resources/css/
 src/test
 .mvn/
 
-src/main/resources/js/test.js
+src/main/resources/static/js/test.js
 src/main/java/com/portfolio/libraryweb/exceptions/EventAbsenceException.java
-src/main/java/com/portfolio/libraryweb/models/Reservation.java
+#src/main/java/com/portfolio/libraryweb/models/Reservation.java
+#src/main/java/com/portfolio/libraryweb/models/repositories/ReservationRepository.java
+#src/main/java/com/portfolio/libraryweb/services/ReservationService.java
+#src/main/java/com/portfolio/libraryweb/controllers/ReservationController.java
 
 ### IntelliJ IDEA ###
 .idea

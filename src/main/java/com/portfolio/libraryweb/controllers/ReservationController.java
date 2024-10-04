@@ -1,20 +1,30 @@
 package com.portfolio.libraryweb.controllers;
 
-import com.portfolio.libraryweb.exceptions.BookAbsenceException;
-import com.portfolio.libraryweb.models.Book;
+import com.portfolio.libraryweb.models.Reservation;
 import com.portfolio.libraryweb.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
+
+    @GetMapping("/reservation/my_books")
+    public String getUserBooks(Model model) {
+        List<Reservation> reservationList = reservationService.getReservationsOfCurrentUser();
+        model.addAttribute("reservations", reservationList);
+        return "my_books";
+    }
 
     @PostMapping("/reservation/{book_id}")
     public ResponseEntity getBookReservation(@PathVariable long book_id) {
