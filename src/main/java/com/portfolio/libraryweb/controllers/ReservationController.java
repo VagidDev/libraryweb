@@ -33,6 +33,7 @@ public class ReservationController {
             case ReservationService.SAME_BOOK -> ResponseEntity.status(HttpStatus.CONFLICT).build();
             case ReservationService.FULL_STORAGE -> ResponseEntity.status(HttpStatus.LOCKED).build();
             case ReservationService.FAILURE -> ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            case ReservationService.RENTED_BOOK -> ResponseEntity.status(HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE).build(); //416
             default -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         };
     }

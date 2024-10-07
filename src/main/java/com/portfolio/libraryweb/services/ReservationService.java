@@ -20,6 +20,7 @@ public class ReservationService {
     public static final int FAILURE = -1;
     public static final int SAME_BOOK = 1;
     public static final int FULL_STORAGE = 2;
+    public static final int RENTED_BOOK = 3;
 
     @Autowired
     private ReservationRepository reservationRepository;
@@ -37,6 +38,9 @@ public class ReservationService {
             }
             if (user.getReservations().stream().anyMatch(reservation -> reservation.getBook().equals(book))) {
                 return SAME_BOOK;
+            }
+            if (!book.isFree()) {
+                return RENTED_BOOK;
             }
             Reservation reservation = new Reservation(optionalUser.get(), optionalBook.get(), new Date());
             reservationRepository.save(reservation);
@@ -75,7 +79,7 @@ public class ReservationService {
             throw new RuntimeException("User not found");
     }
 
-    public List<Reservation> getReservationsByBookId(long bookId) throws BookAbsenceException {
+    public Reservation getReservationByBookId(long bookId) throws BookAbsenceException {
         Optional<Book> book = bookRepository.findById(bookId);
         if (book.isPresent()) {
             return book.get().getReservation();
