@@ -10,30 +10,7 @@
             <li><a href="/books/" class="nav-link px-2 text-white">Книги</a></li>
         </ul>
 
-        <!--<form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
-                   aria-label="Search">
-        </form>-->
-
-        <!--<div class="nav-item dropdown text-end" sec:authorize="isAuthenticated()">
-            <button class="btn btn-success dropdown-toggle" type="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                Управление
-            </button>
-
-            <ul id="list" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#">Аккаунт</a></li>
-                <li><a class="dropdown-item" href="/reservation/my_books">Список книг</a></li>
-                <li><a class="dropdown-item" href="/books/add">Добавить книгу</a></li>
-                <li><a class="dropdown-item" href="#">Добавить событие</a></li>
-                <li>
-                    <form th:action="@{/logout}" method="post">
-                        <input class="dropdown-item" type="submit" value="Выйти"/>
-                    </form>
-                </li>
-            </ul>
-        </div>-->
-        <div class="dropdown text-end" sec:authorize="isAuthenticated()">
+        <div class="dropdown text-end" sec:authorize="isAuthenticated()" data-bs-theme="dark">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>

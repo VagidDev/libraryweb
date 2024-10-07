@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" data-bs-theme="dark">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <title th:text="#{site.title}"></title>
 </head>
 
@@ -35,99 +35,9 @@
     </symbol>
 </svg>
 
-<!--<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
-    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center" id="bd-theme" type="button"
-        aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (dark)">
-        <svg class="bi my-1 theme-icon-active" width="1em" height="1em">
-            <use href="#moon-stars-fill"></use>
-        </svg>
-        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
-        <li>
-            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
-                aria-pressed="false">
-                <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                    <use href="#sun-fill"></use>
-                </svg>
-                Light
-                <svg class="bi ms-auto d-none" width="1em" height="1em">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-        <li>
-            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="dark"
-                aria-pressed="true">
-                <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                    <use href="#moon-stars-fill"></use>
-                </svg>
-                Dark
-                <svg class="bi ms-auto d-none" width="1em" height="1em">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-        <li>
-            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto"
-                aria-pressed="false">
-                <svg class="bi me-2 opacity-50" width="1em" height="1em">
-                    <use href="#circle-half"></use>
-                </svg>
-                Auto
-                <svg class="bi ms-auto d-none" width="1em" height="1em">
-                    <use href="#check2"></use>
-                </svg>
-            </button>
-        </li>
-    </ul>
-</div>-->
-
-<!-- demo version of header-->
-<header class="text-bg-dark" th:insert="~{fragments/header.html :: header}">
-    <!--<div class="container-fluid  mx-auto px-2 py-2">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                <img th:src="@{/icons/stack-of-books.png}" class="bi me-2" width="40" height="32" alt="book-icon">
-            </a>
-
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 text-white" style="font-weight: bold;">Главная</a></li>
-                <li><a href="/events/" class="nav-link px-2 text-white">События</a></li>
-                <li><a href="/books/" class="nav-link px-2 text-white">Книги</a></li>
-
-            </ul>
-
-            <div sec:authorize="isAuthenticated()"  class="nav-item dropdown text-end">
-                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                    Name Surname
-                </button>
-
-                <ul id="list" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" href="#">Аккаунт</a></li>
-                    <li><a class="dropdown-item" href="#">Список книг</a></li>
-                    <li><a class="dropdown-item" href="#">Добавить книгу</a></li>
-                    <li><a class="dropdown-item" href="#">Добавить событие</a></li>
-                    <li>
-                        <form th:action="@{/logout}" method="post">
-                            <input class="dropdown-item" type="submit" value="Выйти"/>
-                        </form>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="text-end" sec:authorize="!isAuthenticated()">
-                <a href="/login" type="button" class="btn btn-outline-light me-2">Login</a>
-                <a href="/sign_up" type="button" class="btn btn-warning">Sign up</a>
-            </div>
-
-        </div>
-    </div>-->
-</header>
+<header class="text-bg-dark" th:insert="~{fragments/header.html :: header}"></header>
 
 <main>
-
     <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -137,22 +47,17 @@
                         <h1>Онлайн библиотека</h1>
                         <p class="opacity-75">Сельская библиотека села Семёновка доступна теперь по одному щелчку!
                         </p>
-                        <p sec:authorize="!isAuthenticated()"><a class="btn btn-lg btn-primary" href="/sign_up">Создать аккаунт</a></p>
-                        <p sec:authorize="isAuthenticated()"><a class="btn btn-lg btn-primary" href="/books/">Читать!</a></p>
+                        <p sec:authorize="!isAuthenticated()"><a class="btn btn-lg btn-primary" href="/sign_up">Создать
+                            аккаунт</a></p>
+                        <p sec:authorize="isAuthenticated()"><a class="btn btn-lg btn-primary"
+                                                                href="/books/">Читать!</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <!-- Marketing messaging and featurettes
-================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
     <div class="container marketing">
-
-        <!-- START THE FEATURETTES -->
 
         <hr class="featurette-divider">
 
@@ -163,7 +68,7 @@
                 <p class="lead">Вы с легкостью можете прочесть ваши любимые произведения не выходя из дома. </p>
             </div>
             <div class="col-md-5">
-                <img th:src="@{/icons/books.jpg}" alt="books" width="500px">
+                <img class="img-ladder" th:src="@{/icons/books.jpg}" alt="books">
             </div>
         </div>
 
@@ -173,12 +78,11 @@
             <div class="col-md-7 order-md-2">
                 <h2 class="featurette-heading fw-normal lh-1">Любите читать не на устройстве, а в живую? <span
                         class="text-body-secondary">Мы можем и так!</span></h2>
-                <p class="lead">Если вам более приятна физическая книга, нежели её электронный аналог, тогда
-                    бронируйте
+                <p class="lead">Если вам более приятна физическая книга, нежели её электронный аналог, тогда бронируйте
                     книги онлайн на своё имя и забирайте их, когда вам удобно!</p>
             </div>
             <div class="col-md-5 order-md-1">
-                <img th:src="@{/icons/ebooks.jpg}" alt="books" width="500px">
+                <img class="img-ladder" th:src="@{/icons/ebooks.jpg}" alt="books">
             </div>
         </div>
 
@@ -191,17 +95,15 @@
                 </h2>
                 <p class="lead">Все вышеперечисленные плюсы будут вам доступны только после регистрации на нашем
                     сайте.
-                    Она не сложна и не занимает много аремени,
+                    Она не сложна и не занимает много времени,
                     поэтому просто зарегистрируйтесь <a href="/sign_up">здесь</a>!</p>
             </div>
             <div class="col-md-5">
-                <img th:src="@{/icons/Online-Registration.jpg}" alt="books" width="500px">
+                <img class="img-ladder" th:src="@{/icons/Online-Registration.jpg}" alt="books">
             </div>
         </div>
 
         <hr class="featurette-divider">
-
-        <!-- /END THE FEATURETTES -->
 
     </div><!-- /.container -->
 
@@ -212,14 +114,12 @@
         <p>© 2017–2024 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
     </footer>
 </main>
-<!--<script th:src="@{/js/main.js}"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz4fnFO9gybRig1YvvFv6ZIVTnAC5kYfcz69Kfy4IoPz74pUcFoc7f36iN"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-t5JHPPt4IvdP5pdEDPpVQMNc9tcMddkXlW4DAK45HVqnhJc/O4+id/MhZiPzO8gZ"
         crossorigin="anonymous"></script>
-
 
 </body>
 
