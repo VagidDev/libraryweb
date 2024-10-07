@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" data-bs-theme="dark">
 
 <head>
     <meta charset="utf-8">
@@ -133,11 +133,12 @@
             <div class="carousel-item active">
                 <img th:src="@{/icons/newphoto.jpg}" class="bd-placeholder-img" alt="Some image">
                 <div class="container">
-                    <div class="carousel-caption text-start">
+                    <div class="carousel-caption text-start" style="color: white">
                         <h1>Онлайн библиотека</h1>
                         <p class="opacity-75">Сельская библиотека села Семёновка доступна теперь по одному щелчку!
                         </p>
-                        <p><a class="btn btn-lg btn-primary" href="/sign_up">Создать аккаунт</a></p>
+                        <p sec:authorize="!isAuthenticated()"><a class="btn btn-lg btn-primary" href="/sign_up">Создать аккаунт</a></p>
+                        <p sec:authorize="isAuthenticated()"><a class="btn btn-lg btn-primary" href="/books/">Читать!</a></p>
                     </div>
                 </div>
             </div>

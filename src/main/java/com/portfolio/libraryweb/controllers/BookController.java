@@ -1,14 +1,9 @@
 package com.portfolio.libraryweb.controllers;
 
-import com.portfolio.libraryweb.config.UserDetails;
 import com.portfolio.libraryweb.exceptions.BookAbsenceException;
 import com.portfolio.libraryweb.models.Book;
-import com.portfolio.libraryweb.models.User;
 import com.portfolio.libraryweb.services.BookService;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;

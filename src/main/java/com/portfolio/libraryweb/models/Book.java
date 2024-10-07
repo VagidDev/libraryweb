@@ -17,7 +17,7 @@ public class Book {
     private String dateOfWriting;
     @Column(columnDefinition = "varchar(20000)")
     private String preface;
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "longtext")
     private String text;
     @OneToOne(mappedBy = "book")
     private Reservation reservation;
