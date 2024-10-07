@@ -12,7 +12,7 @@ public class Reservation {
     private Long id;
     @ManyToOne
     private User user;
-    @ManyToOne
+    @OneToOne
     private Book book;
     private Date date;
 

@@ -19,8 +19,8 @@ public class Book {
     private String preface;
     @Column(columnDefinition = "text")
     private String text;
-    @OneToMany(mappedBy = "book")
-    private List<Reservation> reservations;
+    @OneToOne(mappedBy = "book")
+    private Reservation reservation;
 
     public Book() {}
 
@@ -89,12 +89,16 @@ public class Book {
         this.dateOfWriting = dateOfWriting;
     }
 
-    public List<Reservation> getReservation() {
-        return reservations;
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setReservation(List<Reservation> reservations) {
-        this.reservations = reservations;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+    public boolean isFree() {
+        return reservation == null;
     }
 
 }
