@@ -28,7 +28,7 @@
                 <div class="col p-4 d-flex flex-column position-static">
                     <strong class="d-inline-block mb-2 text-primary" th:text="${event.getCategory()}"></strong>
                     <h3 class="mb-0" th:text="${event.getTitle()}"></h3>
-                    <div class="mb-1 text-muted" th:text="${event.getEventDate()}"></div>
+                    <div class="mb-1 text-muted" th:text="${event.getFormattedEventDate()}"></div>
                     <p class="card-text mb-auto" th:text="${event.getText()}">
                         ...</p>
                     <a href="#" class="stretched-link">Детальнее...</a>
