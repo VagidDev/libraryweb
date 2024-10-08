@@ -1,8 +1,9 @@
 let form = document.getElementById('registrationForm');
 let repeatInput = document.getElementById('floatingRepeat');
 let loginInput = document.getElementById('floatingUsername');
-let dropdownList = document.getElementById('dropdownMenuButton');
 let addBookForm = document.getElementById('add-book-form');
+let addEventForm = document.getElementById('add-event-form');
+// let dropdownList = document.getElementById('dropdownMenuButton');
 
 (function () {
     'use strict'
@@ -150,7 +151,34 @@ if (addBookForm) {
     })
 }
 
-if (dropdownList) {
+if (addEventForm) {
+    addEventForm.addEventListener('submit', function (event) {
+
+        event.preventDefault();
+
+        if (addEventForm.checkValidity()) {
+            let new_event = {
+                title: document.getElementById('floatingTitle').value,
+                eventDate : document.getElementById('floatingDate').value,
+                category : document.getElementById('floatingSelect').value,
+                text : document.getElementById('floatingText').value
+            }
+            fetch('add', {
+                method: 'POST',
+                headers : {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(new_event)
+            }).catch((error) => {
+               console.error('Error: ', error);
+            });
+            location.href='/events/';
+        }
+
+    })
+}
+
+/*if (dropdownList) {
     dropdownList.addEventListener('click', function () {
         let list = document.getElementById('list').classList;
         if (list.contains('show')) {
@@ -159,5 +187,5 @@ if (dropdownList) {
             list.add('show');
         }
     });
-}
+}*/
 

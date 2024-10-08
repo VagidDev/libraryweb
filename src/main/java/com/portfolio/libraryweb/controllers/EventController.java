@@ -28,6 +28,11 @@ public class EventController {
         return "events";
     }
 
+    @GetMapping("/events/add")
+    public String getAddEvent() {
+        return "add-event";
+    }
+
     //don't work now
     /*@PostMapping("/add_event/")
     public String addEvent(@PathVariable long hashID, @RequestParam String title, @RequestParam String category,
