@@ -1,29 +1,25 @@
 package com.portfolio.libraryweb.controllers;
 
 import com.portfolio.libraryweb.models.Event;
-import com.portfolio.libraryweb.models.repositories.UserRepository;
 import com.portfolio.libraryweb.services.EventService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 public class EventController {
-    private final EventService service;
+    private final EventService eventService;
 
     public EventController(EventService eventService) {
-        service = eventService;
+        this.eventService = eventService;
     }
 
     @GetMapping("/events/")
     public String getAllEvents(Model model) {
-        List<Event> events = service.getAllEvents();
+        List<Event> events = eventService.getAllEvents();
         model.addAttribute("events", events);
         return "events";
     }
@@ -33,19 +29,13 @@ public class EventController {
         return "add-event";
     }
 
-    //don't work now
-    /*@PostMapping("/add_event/")
-    public String addEvent(@PathVariable long hashID, @RequestParam String title, @RequestParam String category,
-                           @RequestParam String eventDate, @RequestParam String text) {
-        Event event = new Event(title, category, eventDate, text);
-        service.addEvent(event);
-        return "redirect:/";
+    @PostMapping("/events/add")
+    public ResponseEntity addEvent(@RequestBody Event event) {
+        Event result = eventService.addEvent(event);
+        if (result != null) {
+            return ResponseEntity.ok(result);
+        }
+        return ResponseEntity.notFound().build();
     }
-    //test method that receives json object
-//    @PostMapping("/add_event/")
-    public String addEvent(Event event) {
-        service.addEvent(event);
-        return "Your event was added!";
-    }*/
 
 }
