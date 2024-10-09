@@ -24,6 +24,13 @@ public class UserController {
     }
 
 
+    @PostMapping("/sign_up")
+    public ResponseEntity registerNewUser(@RequestBody User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return ResponseEntity.ok(user);
+    }
+
     @PostMapping("/unique_username")
     public ResponseEntity isUnique(@RequestBody UsernameDto username) {
         Optional<User> optionalUser = userRepository.findByUsername(username.getUsername());
@@ -34,13 +41,15 @@ public class UserController {
         }
     }
 
-    @PostMapping("/sign_up")
-    public ResponseEntity registerNewUser(@RequestBody User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return ResponseEntity.ok(user);
+    @GetMapping("/account/")
+    public String getAccount() {
+        return "account";
     }
 
+    @GetMapping("/account/edit")
+    public String getEditAccount() {
+        return "account-edit";
+    }
 }
 
 //Возможно, должен быть вариант по лучше данного
