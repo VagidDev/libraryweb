@@ -3,6 +3,7 @@ package com.portfolio.libraryweb.controllers;
 import com.portfolio.libraryweb.models.Event;
 import com.portfolio.libraryweb.services.EventService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,11 +26,13 @@ public class EventController {
     }
 
     @GetMapping("/events/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String getAddEvent() {
         return "add-event";
     }
 
     @PostMapping("/events/add")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity addEvent(@RequestBody Event event) {
         Event result = eventService.addEvent(event);
         if (result != null) {
