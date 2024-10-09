@@ -1,9 +1,10 @@
 HELP.md
 target/
-src/main/resources/templates/addForms
+src/main/resources/templates/addForms/
 src/main/java/com/portfolio/libraryweb/coder/
 src/main/resources/css/
-src/test
+src/test/
+src/dust/
 .mvn/
 
 src/main/resources/static/js/test.js
