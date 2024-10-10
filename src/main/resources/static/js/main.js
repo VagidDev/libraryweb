@@ -3,7 +3,7 @@ let repeatInput = document.getElementById('floatingRepeat');
 let loginInput = document.getElementById('floatingUsername');
 let addBookForm = document.getElementById('add-book-form');
 let addEventForm = document.getElementById('add-event-form');
-// let dropdownList = document.getElementById('dropdownMenuButton');
+let editProfileForm = document.getElementById("edit-profile-form");
 
 (function () {
     'use strict'
@@ -178,14 +178,22 @@ if (addEventForm) {
     })
 }
 
-/*if (dropdownList) {
-    dropdownList.addEventListener('click', function () {
-        let list = document.getElementById('list').classList;
-        if (list.contains('show')) {
-            list.remove('show');
-        } else {
-            list.add('show');
-        }
-    });
-}*/
+if (editProfileForm) {
+    editProfileForm.addEventListener('submit', function (event) {
+        event.preventDefault();
 
+        if (editProfileForm.checkValidity()) {
+
+            let formData = new FormData(editProfileForm);
+            formData.append('profilePhoto', document.getElementById('profilePhoto').files[0]);
+            fetch('edit', {
+                method: 'PUT',
+                body: formData
+            }).catch((error) => {
+                console.error("Error: ", error);
+            });
+            location.href='/account/';
+        }
+
+    });
+}
