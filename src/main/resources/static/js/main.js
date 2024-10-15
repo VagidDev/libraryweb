@@ -189,10 +189,14 @@ if (editProfileForm) {
             fetch('edit', {
                 method: 'PUT',
                 body: formData
-            }).catch((error) => {
+            }).then((response) => {
+                if (response.status === 200)
+                    window.location = '/account/';
+            })
+
+                .catch((error) => {
                 console.error("Error: ", error);
             });
-            location.href='/account/';
         }
 
     });
