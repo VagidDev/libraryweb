@@ -17,6 +17,7 @@ public class User {
     private int age;
     private String email;
     private String role;
+    private String image;
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations;
 
@@ -101,6 +102,14 @@ public class User {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<Reservation> getReservations() {
