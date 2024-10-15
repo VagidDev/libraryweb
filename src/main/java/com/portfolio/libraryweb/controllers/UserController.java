@@ -1,16 +1,17 @@
 package com.portfolio.libraryweb.controllers;
 
 import com.portfolio.libraryweb.models.User;
-import com.portfolio.libraryweb.models.repositories.UserRepository;
 import com.portfolio.libraryweb.services.UserService;
+import jakarta.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -29,6 +30,7 @@ public class UserController {
             return ResponseEntity.ok(user);
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
+
     //TODO: rewrite the logic of this method
     @PostMapping("/unique_username")
     public ResponseEntity isUnique(@RequestBody UsernameDto username) {
@@ -46,6 +48,18 @@ public class UserController {
     public String getEditAccount() {
         return "account-edit";
     }
+
+    @PutMapping(value = "/account/edit", consumes = "multipart/form-data")
+    public ResponseEntity updateAccount(@RequestParam String name, @RequestParam String surname,
+                                        @RequestParam String email, @Nullable @RequestParam MultipartFile profilePhoto) {
+        if (name.isEmpty() || surname.isEmpty() || email.isEmpty())
+            return ResponseEntity.badRequest().body(null);
+        if (profilePhoto == null)
+            userService.editProfile(name, surname, email);
+        else
+            userService.editProfile(name, surname, email, profilePhoto);
+        return ResponseEntity.ok().build();
+    }
 }
 
 //Возможно, должен быть вариант по лучше данного
@@ -62,3 +76,45 @@ class UsernameDto {
         this.username = username;
     }
 }
+
+/*class UserDto {
+    private String name;
+    private String surname;
+    private String email;
+    private MultipartFile profilePhoto;
+
+    public UserDto() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public MultipartFile getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(MultipartFile profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
+}*/

@@ -18,7 +18,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <img src="../static/icons/books.jpg" alt="User Avatar" class="rounded-circle mb-3" width="150" height="150"> <!--th:src="@{/icons/books.jpg}"-->
+                    <img th:src="@{/icons/books.jpg}" alt="User Avatar" class="rounded-circle mb-3" width="150" height="150"> <!--th:src="@{/icons/books.jpg}"--> <!--src="../static/icons/books.jpg"-->
                     <h3 class="card-title">Имя пользователя</h3>  <!--th:text="${user.name}"-->
                     <p class="text-muted">email@example.com</p> <!--th:text="${user.email}"-->
                 </div>
