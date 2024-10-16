@@ -187,7 +187,7 @@ if (editProfileForm) {
             let formData = new FormData(editProfileForm);
             formData.append('profilePhoto', document.getElementById('profilePhoto').files[0]);
             fetch('edit', {
-                method: 'PUT',
+                method: 'PATCH',
                 body: formData
             }).then((response) => {
                 if (response.status === 200)

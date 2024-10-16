@@ -49,7 +49,7 @@ public class UserController {
         return "account-edit";
     }
 
-    @PutMapping(value = "/account/edit", consumes = "multipart/form-data")
+    @PatchMapping(value = "/account/edit", consumes = "multipart/form-data")
     public ResponseEntity updateAccount(@RequestParam String name, @RequestParam String surname,
                                         @RequestParam String email, @Nullable @RequestParam MultipartFile profilePhoto) {
         if (name.isEmpty() || surname.isEmpty() || email.isEmpty())
