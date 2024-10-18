@@ -2,13 +2,13 @@ package com.portfolio.libraryweb.controllers;
 
 import com.portfolio.libraryweb.models.User;
 import com.portfolio.libraryweb.services.UserService;
-import jakarta.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,12 +40,16 @@ public class UserController {
     }
 
     @GetMapping("/account/")
-    public String getAccount() {
+    public String getAccount(Model model) {
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("image", userService.getBase64ImageString());
         return "account";
     }
 
     @GetMapping("/account/edit")
-    public String getEditAccount() {
+    public String getEditAccount(Model model) {
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("image", userService.getBase64ImageString());
         return "account-edit";
     }
 

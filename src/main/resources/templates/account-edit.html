@@ -20,10 +20,9 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body text-center">
-                    <img th:src="@{/icons/books.jpg}"  alt="User Avatar" class="rounded-circle mb-3" width="150"
-                         height="150"> <!--th:src="@{/icons/user-avatar.jpg}"--> <!--src="../static/icons/books.jpg"-->
+                    <img th:src="'data:image/jpeg;base64, ' + ${image}" alt="User Avatar" class="rounded-circle mb-3" width="150" height="150">
                     <h3 class="card-title">Загрузить новый аватар</h3>
-                    <form method="post" enctype="multipart/form-data"> <!--th:action="@{/upload_avatar}"-->
+                    <form method="post" enctype="multipart/form-data">
                         <div class="mb-3">
                             <input type="file" class="form-control" name="image" id="profilePhoto" accept="image/*"
                                    required>
@@ -42,21 +41,21 @@
                 <div class="card-body">
                     <form class="form-floating" enctype="multipart/form-data" id="edit-profile-form">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingName" placeholder="Ivan" name="name" required>
+                            <input type="text" class="form-control" id="floatingName" placeholder="Ivan" name="name"  th:value="${user.getName()}" required>
                             <label for="floatingName">Имя</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingSurname" placeholder="Ivanov" name="surname" required>
+                            <input type="text" class="form-control" id="floatingSurname" placeholder="Ivanov" name="surname" th:value="${user.getSurname()}" required>
                             <label for="floatingSurname">Фамилия</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingEmail" placeholder="name@gmail.com" name="email" required>
+                            <input type="email" class="form-control" id="floatingEmail" placeholder="name@gmail.com" name="email" th:value="${user.getEmail()}" required>
                             <label for="floatingEmail">Эл. почта</label>
                         </div>
                         <div >
                             <input class="btn btn-success" type="submit" value="Сохранить">
-                            <a class="btn btn-danger" href="#">Отмена</a>
+                            <a class="btn btn-danger" href="/account/">Отмена</a>
                         </div>
 
                     </form>

@@ -4,17 +4,17 @@ import com.portfolio.libraryweb.models.User;
 import com.portfolio.libraryweb.models.repositories.UserRepository;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Base64;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -25,13 +25,23 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private User getCurrentUser() {
+    public User getCurrentUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
             return user.get();
         }
         throw new UsernameNotFoundException("User not found");
+    }
+
+    public String getBase64ImageString () {
+        User user = getCurrentUser();
+        try (FileInputStream fis = new FileInputStream(user.getImage())) {
+            byte[] byteImage = fis.readAllBytes();
+            return Base64.getEncoder().encodeToString(byteImage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public User register(@NotNull User user) {
