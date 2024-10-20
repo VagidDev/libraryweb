@@ -36,7 +36,8 @@ public class UserService {
 
     public String getBase64ImageString () {
         User user = getCurrentUser();
-        try (FileInputStream fis = new FileInputStream(user.getImage())) {
+        String path = user.getImage() != null ? user.getImage() : "images/default_images/avatar.jpg";
+        try (FileInputStream fis = new FileInputStream(path)) {
             byte[] byteImage = fis.readAllBytes();
             return Base64.getEncoder().encodeToString(byteImage);
         } catch (IOException e) {
