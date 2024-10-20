@@ -8,11 +8,13 @@
             <li><a href="/" class="nav-link px-2 text-white" style="font-weight: bold;">Главная</a></li>
             <li><a href="/events/" class="nav-link px-2 text-white">События</a></li>
             <li><a href="/books/" class="nav-link px-2 text-white">Книги</a></li>
+            <li>
+                <p class="nav-link px-2 text-white" th:text="${testAttr}">Test attribute not found</p></li>
         </ul>
 
         <div class="dropdown text-end" sec:authorize="isAuthenticated()" data-bs-theme="dark">
             <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                <img th:src="'data:image/jpeg;base64, ' + ${userAvatar}" alt="mdo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small">
                 <li><a class="dropdown-item" href="/account/">Аккаунт</a></li>
