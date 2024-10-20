@@ -31,7 +31,7 @@ public class SecurityConfig {
                         .requestMatchers("/sign_up", "/unique_username").permitAll()
                         .requestMatchers("/", "/home").permitAll()
                         .requestMatchers("/css/**", "/icons/**", "/js/**").permitAll()
-                        .requestMatchers("/**").authenticated())
+                        .anyRequest().authenticated())
                 .formLogin(page -> page
                         .defaultSuccessUrl("/", true)
                         .permitAll())
