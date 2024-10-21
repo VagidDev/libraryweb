@@ -2,6 +2,9 @@ package com.portfolio.libraryweb.models;
 
 import jakarta.persistence.*;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 
 @Entity
@@ -67,5 +70,22 @@ public class Event {
 
     public String getFormattedEventDate() {
         return String.format("Дата проведения: %1$td.%1$tm.%1$tY", eventDate);
+    }
+
+    public String getImage() {
+        String path = "src/main/resources/static/icons/" +  switch (category) {
+            case "Тематический вечер" -> "night.jpg";
+            case "История поэта" -> "writer.jpg";
+            case "Презентация" -> "presentation.jpg";
+            case "Танцы" -> "dance.jpg";
+            default -> "";
+        };
+
+        try (FileInputStream fis = new FileInputStream(path)) {
+            byte[] bytes = fis.readAllBytes();
+            return Base64.getEncoder().encodeToString(bytes);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
