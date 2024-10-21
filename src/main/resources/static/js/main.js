@@ -142,10 +142,15 @@ if (addBookForm) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(book)
+            }).then(response => {
+                if (response.status === 200) {
+                    fetch('/books/', {
+                        method: 'GET'
+                    }).then(() => window.location = '/books/');
+                }
             }).catch((error) => {
                 console.error('Error:', error);
             });
-            location.href = '/books/';
         }
 
     })
@@ -169,10 +174,15 @@ if (addEventForm) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(new_event)
+            }).then((response) => {
+                if (response.status === 200) {
+                    fetch('/events/', {
+                        method: 'GET'
+                    }).then(() => window.location = '/events/');
+                }
             }).catch((error) => {
                console.error('Error: ', error);
             });
-            location.href='/events/';
         }
 
     })
@@ -192,9 +202,7 @@ if (editProfileForm) {
             }).then((response) => {
                 if (response.status === 200)
                     window.location = '/account/';
-            })
-
-                .catch((error) => {
+            }).catch((error) => {
                 console.error("Error: ", error);
             });
         }
