@@ -21,4 +21,13 @@ public class GlobalControllerAdvice {
         return userService.getBase64ImageString();
     }
 
+    @ModelAttribute("username")
+    public String username() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal().equals("anonymousUser")) {
+            return null;
+        }
+        return userService.getCurrentUser().getUsername();
+    }
+
 }

@@ -19,7 +19,7 @@
                      class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small">
-                <li><a class="dropdown-item" href="/account/">Аккаунт</a></li>
+                <li><a class="dropdown-item" href="/account/">Аккаунт: <span class="ml-1 text-muted" th:text="${username}"></span></a></li>
                 <li><a class="dropdown-item" href="/reservation/my_books">Список книг</a></li>
                 <div sec:authorize="hasAuthority('ADMIN')">
                     <li>
