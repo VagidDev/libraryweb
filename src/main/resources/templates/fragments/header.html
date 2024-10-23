@@ -13,15 +13,24 @@
         </ul>
 
         <div class="dropdown text-end" sec:authorize="isAuthenticated()" data-bs-theme="dark">
-            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img th:src="'data:image/jpeg;base64, ' + ${userAvatar}" alt="mdo" width="32" height="32" class="rounded-circle">
+            <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
+               data-bs-toggle="dropdown" aria-expanded="false">
+                <img th:src="'data:image/jpeg;base64, ' + ${userAvatar}" alt="mdo" width="32" height="32"
+                     class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small">
                 <li><a class="dropdown-item" href="/account/">Аккаунт</a></li>
                 <li><a class="dropdown-item" href="/reservation/my_books">Список книг</a></li>
-                <li><a class="dropdown-item" href="/books/add">Добавить книгу</a></li>
-                <li><a class="dropdown-item" href="/events/add">Добавить событие</a></li>
-                <li><hr class="dropdown-divider"></li>
+                <div sec:authorize="hasAuthority('ADMIN')">
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="/books/add">Добавить книгу</a></li>
+                    <li><a class="dropdown-item" href="/events/add">Добавить событие</a></li>
+                </div>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
                 <li>
                     <form th:action="@{/logout}" method="post">
                         <input class="dropdown-item" type="submit" value="Выйти"/>
