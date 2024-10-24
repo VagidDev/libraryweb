@@ -15,3 +15,6 @@
     object-position: 0 0;
 }
 
+.wrap-circle {
+    object-fit: cover;
+}
