@@ -14,7 +14,7 @@ public class Book {
     private String title;
     private String genre;
     private String author;
-    private String dateOfWriting;
+    private int dateOfWriting;
     @Column(columnDefinition = "varchar(20000)")
     private String preface;
     @Column(columnDefinition = "longtext")
@@ -24,7 +24,7 @@ public class Book {
 
     public Book() {}
 
-    public Book(String title, String preface, String genre, String author, String text, String dateOfWriting) {
+    public Book(String title, String preface, String genre, String author, String text, int dateOfWriting) {
         this.title = title;
         this.preface = preface;
         this.genre = genre;
@@ -81,11 +81,11 @@ public class Book {
         this.text = text;
     }
 
-    public String getDateOfWriting() {
+    public int getDateOfWriting() {
         return dateOfWriting;
     }
 
-    public void setDateOfWriting(String dateOfWriting) {
+    public void setDateOfWriting(int dateOfWriting) {
         this.dateOfWriting = dateOfWriting;
     }
 
