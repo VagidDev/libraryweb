@@ -44,8 +44,8 @@
             </div>
 
             <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect" name="genre" aria-label="Floating label select example">
-                    <option selected>Выберите жанр книги</option>
+                <select class="form-select" id="floatingSelect" name="genre" aria-label="Floating label select example" required>
+                    <option selected value="">Выберите жанр книги</option>
                     <option value="romance">Роман</option>
                     <option value="comedy">Комедия</option>
                     <option value="piece">Пьеса</option>
@@ -83,11 +83,11 @@
 
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button class="btn btn-success" type="submit">Сохранить</button>
+                <a class="btn btn-danger" href="/books/">Отмена</a>
             </div>
         </form>
     </div>
 </div>
-<!--<script src="../static/js/main.js"></script>-->
 <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
