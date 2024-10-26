@@ -11,15 +11,62 @@
 <body>
 <header class="text-bg-dark" th:insert="~{fragments/header.html :: header}">
 </header>
-<div class="container mt-3">
-    <div class="col-lg-10 mt-4" th:each="book : ${books}">
-        <h2 th:text="${book.getTitle()}"></h2>
-        <div class="mb-1 text-muted" th:text="${book.getAuthor()}"></div>
-        <p th:text="${book.getPreface()}"></p>
-        <p>
-            <a class="btn btn-secondary" th:href="'/books/' + ${book.getId()}" role="button">Читать</a>
-            <a class="btn btn-secondary" role="button" th:onclick="'javascript:preserveBook(' + ${book.getId()} + ');'">Забронировать</a>
-        </p>
+<div class="container-fluid mt-3">
+    <div class="row">
+<!--        Filters-->
+        <div class="col-lg-2 mx-4 mb-4">
+            <div class="card">
+                <h5 class="card-header">Фильтры</h5>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="genre" class="form-label">Жанр</label>
+                            <select class="form-select" id="genre" name="genre">
+                                <option selected value="">Выберите жанр книги</option>
+                                <option value="romance">Роман</option>
+                                <option value="comedy">Комедия</option>
+                                <option value="piece">Пьеса</option>
+                                <option value="psychology">Психология</option>
+                                <option value="history">История</option>
+                                <option value="textbook">Учебник</option>
+                                <option value="horror">Ужасы</option>
+                                <option value="adventures">Приключения</option>
+                                <option value="detective">Детектив</option>
+                                <option value="fantastic">Фантастика</option>
+                                <option value="science">Наука</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Название</label>
+                            <input type="text" class="form-control" id="title" name="title"
+                                   placeholder="Введите название">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="author" class="form-label">Автор</label>
+                            <input type="text" class="form-control" id="author" name="author"
+                                   placeholder="Введите автора">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Применить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+<!--        Books-->
+        <div class="col-lg-9">
+            <div class="col-lg-12 mt-4" th:each="book : ${books}">
+                <h2 th:text="${book.getTitle()}"></h2>
+                <div class="mb-1 text-muted" th:text="${book.getAuthor()}"></div>
+                <p th:text="${book.getPreface()}"></p>
+                <p>
+                    <a class="btn btn-secondary" th:href="'/books/' + ${book.getId()}" role="button">Читать</a>
+                    <a class="btn btn-secondary" role="button"
+                       th:onclick="'javascript:preserveBook(' + ${book.getId()} + ');'">Забронировать</a>
+                </p>
+            </div>
+        </div>
     </div>
 </div>
 <script th:src="@{/js/main.js}"></script>
