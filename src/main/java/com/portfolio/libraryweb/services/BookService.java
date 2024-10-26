@@ -34,6 +34,15 @@ public class BookService {
         }
     }
 
+    public List<Book> getFilteredBooks(String genre, String author, String title) {
+        List<Book> allBooks = getAllBooks();
+        return allBooks.stream()
+                .filter(book -> book.getGenre().equals(genre) || genre.isEmpty())
+                .filter(book -> book.getAuthor().contains(author))
+                .filter(book -> book.getTitle().contains(title))
+                .toList();
+    }
+
     public Book addBook(Book book) {
         return bookRepository.save(book);
     }

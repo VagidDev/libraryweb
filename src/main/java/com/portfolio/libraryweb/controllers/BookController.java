@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 
 @Controller
@@ -34,6 +35,13 @@ public class BookController {
         } catch (BookAbsenceException e) {
             return "redirect:/books/";
         }
+    }
+
+    @GetMapping("/books/find")
+    public String findBooks(@RequestParam String genre, @RequestParam String title, @RequestParam String author, Model model) {
+        List<Book> filteredBooks = bookService.getFilteredBooks(genre, author, title);
+        model.addAttribute("books", filteredBooks);
+        return "books";
     }
 
     @PostMapping(value = "/books/add")
