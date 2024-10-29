@@ -2,7 +2,10 @@ package com.portfolio.libraryweb.models;
 
 import jakarta.persistence.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Entity
 @Table(name = "reservations")
@@ -55,5 +58,18 @@ public class Reservation {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getSimpleDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        return dateFormat.format(date);
+    }
+
+    public boolean isExpired() {
+        Date currentDate = new Date();
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 14);
+        return calendar.getTime().before(currentDate);
     }
 }
