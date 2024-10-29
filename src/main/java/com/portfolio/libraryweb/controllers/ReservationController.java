@@ -37,8 +37,15 @@ public class ReservationController {
             default -> ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         };
     }
-//TODO:make reference better
-    @DeleteMapping("/reservation/{book_id}/users/{username}")
+
+    @GetMapping("/reservation/reserved/")
+    public String getReservations(Model model) {
+        List<Reservation> reservationList = reservationService.getAllReservations();
+        model.addAttribute("reservations", reservationList);
+        return "reserved-books";
+    }
+
+    @DeleteMapping("/reservation/reserved/{book_id}/users/{username}")
     public ResponseEntity deleteBookReservation(@PathVariable long book_id, @PathVariable String username) {
         if(reservationService.returnBook(username, book_id))
             return ResponseEntity.ok().build();
