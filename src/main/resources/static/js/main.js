@@ -209,3 +209,22 @@ if (editProfileForm) {
 
     });
 }
+
+function deleteReservation(elem) {
+    let book_id = elem.getAttribute('data-book');
+    let username = elem.getAttribute('data-username');
+
+    let link = '/reservation/reserved/' + book_id + '/user/' + username;
+
+    if (book_id > 0 && username !== '') {
+        fetch(link, {
+            method: 'DELETE',
+        }).then(response => {
+            if (response.status === 200) {
+                location.reload();
+            }
+        }).catch(error => {
+            console.error("Error ", error);
+        });
+    }
+}

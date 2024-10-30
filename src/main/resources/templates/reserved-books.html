@@ -23,17 +23,27 @@
                 <rect th:unless="${reservation.isExpired()}" width="100%" height="100%" fill="#007bff"></rect>
             </svg>
             <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-                <div class="d-flex justify-content-between">
-                    <strong class="text-gray-dark"
-                            th:text="${reservation.getUser().getName()} + ' ' + ${reservation.getUser().getSurname()}">Full
-                        Name</strong>
-                    <a th:href="'/reservation/reserved/' + ${reservation.getBook().getId()} + '/users/' + ${reservation.getUser().getUsername()}">Вернуть</a>
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex justify-content-between">
+                            <strong class="text-gray-dark"
+                                    th:text="${reservation.getUser().getName()} + ' ' + ${reservation.getUser().getSurname()}">Full
+                                Name</strong>
+                        </div>
+                        <span class="d-block fs-6 fst-italic"
+                              th:text="${reservation.getBook().getAuthor()} + ': ' + ${reservation.getBook().getTitle()}"></span>
+                        <span class="d-block fw-semibold">Взято: <span class="text-decoration-underline"
+                                                                       th:text="${reservation.getSimpleDate()}"></span> Вернуть до: <span
+                                class="text-decoration-underline"
+                                th:text="${reservation.getExpirationDate()}"></span></span>
+                    </div>
+                    <div class="col d-flex">
+                        <button class="btn btn-warning ms-auto" type="button" onclick="deleteReservation(this)"
+                                th:data-book="${reservation.getBook().getId()}"
+                                th:data-username="${reservation.getUser().getUsername()}">Вернуть
+                        </button>
+                    </div>
                 </div>
-                <span class="d-block fs-6 fst-italic"
-                      th:text="${reservation.getBook().getAuthor()} + ': ' + ${reservation.getBook().getTitle()}"></span>
-                <span class="d-block fw-semibold">Взято: <span class="text-decoration-underline"
-                                                               th:text="${reservation.getSimpleDate()}"></span> Вернуть до: <span
-                        class="text-decoration-underline" th:text="${reservation.getExpirationDate()}"></span></span>
             </div>
         </div>
         <h6 class="text-end pb-2 mb-0 mt-2">Легенда</h6>
