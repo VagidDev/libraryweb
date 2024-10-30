@@ -5,6 +5,7 @@ import com.portfolio.libraryweb.services.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -38,6 +39,7 @@ public class ReservationController {
         };
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/reservation/reserved/")
     public String getReservations(Model model) {
         List<Reservation> reservationList = reservationService.getAllReservations();
@@ -45,11 +47,11 @@ public class ReservationController {
         return "reserved-books";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/reservation/reserved/{book_id}/users/{username}")
     public ResponseEntity deleteBookReservation(@PathVariable long book_id, @PathVariable String username) {
         if(reservationService.returnBook(username, book_id))
             return ResponseEntity.ok().build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
 }
