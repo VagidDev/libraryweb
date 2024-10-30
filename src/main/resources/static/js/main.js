@@ -32,7 +32,7 @@ function preserveBook(book_id) {
     }).then((response) => {
         switch (response.status) {
             case 201:
-                alert("Книга была зарезервирована!");
+                alert("Вы взяли книгу в аренду!");
                 break;
             case 404:
                 alert("Not found");

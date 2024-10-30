@@ -48,7 +48,7 @@ public class ReservationController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @DeleteMapping("/reservation/reserved/{book_id}/users/{username}")
+    @DeleteMapping("/reservation/reserved/{book_id}/user/{username}")
     public ResponseEntity deleteBookReservation(@PathVariable long book_id, @PathVariable String username) {
         if(reservationService.returnBook(username, book_id))
             return ResponseEntity.ok().build();
