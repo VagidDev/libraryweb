@@ -10,6 +10,7 @@ import java.util.GregorianCalendar;
 @Entity
 @Table(name = "reservations")
 public class Reservation {
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -61,8 +62,14 @@ public class Reservation {
     }
 
     public String getSimpleDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
         return dateFormat.format(date);
+    }
+
+    public String getExpirationDate() {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 14);
+        return dateFormat.format(calendar.getTime());
     }
 
     public boolean isExpired() {
