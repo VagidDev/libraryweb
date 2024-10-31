@@ -228,3 +228,26 @@ function deleteReservation(elem) {
         });
     }
 }
+
+function sendNotification(elem) {
+    let bookId = elem.getAttribute("data-book");
+    let link = '/reservation/reserved/notification';
+
+    let data = new FormData();
+    data.append('bookId', bookId);
+
+    if (bookId > 0) {
+        fetch(link, {
+            method: 'POST',
+            body: data
+        }).then(response => {
+            if (response.status === 200) {
+                alert('Предупреждение добавлено в очередь на отправку!');
+            } else {
+                alert('Error!')
+            }
+        }).catch(err => {
+            console.error('Error: ', err);
+        });
+    }
+}

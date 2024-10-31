@@ -37,8 +37,12 @@
                                 class="text-decoration-underline"
                                 th:text="${reservation.getExpirationDate()}"></span></span>
                     </div>
-                    <div class="col d-flex">
-                        <button class="btn btn-warning ms-auto" type="button" onclick="deleteReservation(this)"
+                    <div class="col d-flex justify-content-md-end">
+<!--                        TODO: create method that will send book_id to server through post method-->
+                        <button class="btn btn-primary me-2" type="button" onclick="sendNotification(this)"
+                                th:data-book="${reservation.getBook().getId()}">Предупредить
+                        </button>
+                        <button class="btn btn-warning me-2" type="button" onclick="deleteReservation(this)"
                                 th:data-book="${reservation.getBook().getId()}"
                                 th:data-username="${reservation.getUser().getUsername()}">Вернуть
                         </button>

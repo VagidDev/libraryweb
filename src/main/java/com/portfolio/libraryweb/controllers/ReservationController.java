@@ -8,10 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -53,5 +50,12 @@ public class ReservationController {
         if(reservationService.returnBook(username, book_id))
             return ResponseEntity.ok().build();
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @PostMapping("/reservation/reserved/notification")
+    public ResponseEntity sendNotification(@RequestParam int bookId) {
+        new Thread(() -> reservationService.sendNotificationToUser(bookId)).start();
+        return ResponseEntity.ok().build();
     }
 }
