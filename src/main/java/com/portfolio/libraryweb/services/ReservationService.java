@@ -7,7 +7,11 @@ import com.portfolio.libraryweb.models.User;
 import com.portfolio.libraryweb.models.repositories.BookRepository;
 import com.portfolio.libraryweb.models.repositories.ReservationRepository;
 import com.portfolio.libraryweb.models.repositories.UserRepository;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +26,19 @@ public class ReservationService {
     public static final int FULL_STORAGE = 2;
     public static final int RENTED_BOOK = 3;
 
+    @Value("${sender.address}")
+    private static String sender;
+    @Value("${sender.password}")
+    private static String senderPassword;
+    @Value("${host}")
+    private static String host;
+
     @Autowired
     private ReservationRepository reservationRepository;
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     private int registerBook(Optional<User> optionalUser, Optional<Book> optionalBook) {
         if (optionalBook.isPresent() && optionalUser.isPresent()) {
@@ -109,5 +120,46 @@ public class ReservationService {
         return false;
     }
 
+    //TODO: Add logging
+    public void sendNotificationToUser(long bookId) {
+        try {
+            Reservation reservation = getReservationByBookId(bookId);
+            User user = reservation.getUser();
+
+            String messageTitle = "Термин аренды книги закончился!";
+
+            String messageText = "Дорогой читатель, " + reservation.getSimpleDate() +
+                    " Вы взяли в аренду книгу " + reservation.getBook().getTitle() + ", " +
+                    reservation.getBook().getAuthor() + ". Просим вернуть ее в библиотеку в ближайшее время. " +
+                    "С уважением, Администрация библиотеки села Семеновка!";
+
+            Properties props = System.getProperties();
+
+            props.put("mail.smtp.host", host);
+            props.put("mail.smtp.port", "587");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+
+            Session session = Session.getInstance(props, new Authenticator() {
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(sender, senderPassword);
+                }
+            });
+
+            //send a message
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(sender));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+
+            message.setSubject(messageTitle);
+
+            message.setText(messageText);
+
+            Transport.send(message);
+            //here will be logging
+        } catch (BookAbsenceException | MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

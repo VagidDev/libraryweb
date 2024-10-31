@@ -10,6 +10,7 @@ src/dust/
 
 src/main/resources/static/js/test.js
 src/main/java/com/portfolio/libraryweb/exceptions/EventAbsenceException.java
+src/main/resources/smtp.properties
 
 ### IntelliJ IDEA ###
 .idea
