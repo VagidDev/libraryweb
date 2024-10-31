@@ -26,19 +26,25 @@ public class ReservationService {
     public static final int FULL_STORAGE = 2;
     public static final int RENTED_BOOK = 3;
 
-    @Value("${sender.address}")
-    private static String sender;
-    @Value("${sender.password}")
-    private static String senderPassword;
-    @Value("${host}")
-    private static String host;
+    private final String sender;
 
-    @Autowired
-    private ReservationRepository reservationRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private BookRepository bookRepository;
+    private final String senderPassword;
+    private final String host;
+
+    private final ReservationRepository reservationRepository;
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
+
+    public ReservationService(ReservationRepository reservationRepository, UserRepository userRepository, BookRepository bookRepository,
+                              @Value("${sender.address}") String sender, @Value("${sender.password}") String senderPassword,
+                              @Value("${host}")String host) {
+        this.reservationRepository = reservationRepository;
+        this.userRepository = userRepository;
+        this.bookRepository = bookRepository;
+        this.sender = sender;
+        this.senderPassword = senderPassword;
+        this.host = host;
+    }
 
     private int registerBook(Optional<User> optionalUser, Optional<Book> optionalBook) {
         if (optionalBook.isPresent() && optionalUser.isPresent()) {
